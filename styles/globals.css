@@ -9,4 +9,8 @@
          ease-out;
 
     }
+
+    .btn{
+        @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out
+    }
 }

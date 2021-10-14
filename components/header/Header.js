@@ -8,7 +8,7 @@ import { HomeIcon }
 
 function Header() {
     return (
-        <div className="shadow-sm border-b bg-white sticky top-0 z-50 " >
+        <div className="shadow-sm border-b bg-white w-full sticky top-0 z-[100] " >
 
             <div className="flex justify-between items-center bg-white max-w-6xl mx-5 xl:mx-auto">
 
