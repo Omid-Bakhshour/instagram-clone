@@ -6,8 +6,34 @@ import { SearchIcon, PlusCircleIcon, UserGroupIcon, HeartIcon, PaperAirplaneIcon
 import { HomeIcon }
     from "@heroicons/react/solid"
 import { useSession } from "next-auth/react"
-
+import { useEffect } from "react"
+import axios from "axios"
 function Header() {
+
+    useEffect(() => {
+
+        async function getData() {
+
+            const options = {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            };
+
+            var bodyFormData = new FormData();
+
+            // bodyFormData.append('username', credentials.username);
+            // bodyFormData.append('password', credentials.password);
+            bodyFormData.append('username', "09334482466");
+            bodyFormData.append('password', "omid7896378963");
+
+            let user = await axios.post(`http://192.168.1.102/achomestan2/authentication/login`,
+                bodyFormData, options
+            )
+
+            console.log(user.data);
+        }
+        getData();
+
+    }, [])
 
     const { data: session } = useSession();
 

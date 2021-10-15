@@ -1,6 +1,6 @@
 import { getProviders, signIn } from "next-auth/react"
 
-export default function SignIn({ }) {
+export default function SignIn({ providers }) {
     return (
         <>
             <div >
@@ -12,12 +12,12 @@ export default function SignIn({ }) {
     )
 }
 
-// export async function getServerSideProps() {
-//     const providers = await getProviders()
-//     return {
-//         props: {
-//             providers,
-//         },
-//     }
-// }
+export async function getServerSideProps() {
+    const providers = await getProviders()
+    return {
+        props: {
+            providers,
+        },
+    }
+}
 
