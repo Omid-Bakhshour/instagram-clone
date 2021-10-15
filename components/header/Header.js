@@ -5,8 +5,13 @@ import { SearchIcon, PlusCircleIcon, UserGroupIcon, HeartIcon, PaperAirplaneIcon
     from "@heroicons/react/outline"
 import { HomeIcon }
     from "@heroicons/react/solid"
+import { useSession } from "next-auth/react"
 
 function Header() {
+
+    const { data: session } = useSession();
+
+    console.log(session);
     return (
         <div className="shadow-sm border-b bg-white w-full sticky top-0 z-[100] " >
 
@@ -49,7 +54,7 @@ function Header() {
 
                     <HeartIcon className="navBtn" />
 
-                    <img src="https://lh3.googleusercontent.com/ogw/ADea4I63hAY1m6qVwise20ijlooItppdeTvwS52Yh1t1=s32-c-mo"
+                    <img src="/images/sample1.jpg"
                         className="rounded-full h-10 cursor-pointer " alt="profilepic" />
 
 

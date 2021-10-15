@@ -1,25 +1,23 @@
 import { getProviders, signIn } from "next-auth/react"
 
-export default function SignIn({ providers }) {
+export default function SignIn({ }) {
     return (
         <>
-            {Object.values(providers).map((provider) => (
-                <div key={provider.name}>
-                    <button onClick={() => signIn(provider.id)}>
-                        Sign in with {provider.name}
-                    </button>
-                </div>
-            ))}
+            <div >
+                <button onClick={() => signIn('credentials')}>
+                    Sign in with
+                </button>
+            </div>
         </>
     )
 }
 
-export async function getServerSideProps(context) {
-    const providers = await getProviders()
-    return {
-        props: {
-            providers,
-        },
-    }
-}
+// export async function getServerSideProps() {
+//     const providers = await getProviders()
+//     return {
+//         props: {
+//             providers,
+//         },
+//     }
+// }
 
