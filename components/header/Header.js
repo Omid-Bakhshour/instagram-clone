@@ -5,51 +5,25 @@ import { SearchIcon, PlusCircleIcon, UserGroupIcon, HeartIcon, PaperAirplaneIcon
     from "@heroicons/react/outline"
 import { HomeIcon }
     from "@heroicons/react/solid"
-import { useSession } from "next-auth/react"
-import { useEffect } from "react"
-import axios from "axios"
+import { useSession, signIn, signOut } from "next-auth/react"
+
+import { useRouter } from "next/router"
 function Header() {
 
-    useEffect(() => {
-
-        async function getData() {
-
-            const options = {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            };
-
-            var bodyFormData = new FormData();
-
-            // bodyFormData.append('username', credentials.username);
-            // bodyFormData.append('password', credentials.password);
-            bodyFormData.append('username', "09334482466");
-            bodyFormData.append('password', "omid7896378963");
-
-            let user = await axios.post(`http://192.168.1.102/achomestan2/authentication/login`,
-                bodyFormData, options
-            )
-
-            console.log(user.data);
-        }
-        getData();
-
-    }, [])
-
     const { data: session } = useSession();
-
-    console.log(session);
+    const router = useRouter();
     return (
         <div className="shadow-sm border-b bg-white w-full sticky top-0 z-[100] " >
 
             <div className="flex justify-between items-center bg-white max-w-6xl mx-5 xl:mx-auto">
 
 
-                <div className="relative w-24 h-10 hidden lg:inline-grid cursor-pointer flex-shrink-0 " >
+                <div onClick={() => router.push("/")} className="relative w-24 h-10 hidden lg:inline-grid cursor-pointer flex-shrink-0 " >
                     <Image src="/images/instaLogo.png" layout="fill" objectFit="contain" />
 
                 </div>
 
-                <div className="relative w-10 h-10 inline-grid lg:hidden  flex-shrink-0 cursor-pointer " >
+                <div onClick={() => router.push("/")} className="relative w-10 h-10 inline-grid lg:hidden  flex-shrink-0 cursor-pointer " >
                     <Image src="/images/insta-logo2.png" layout="fill" objectFit="contain" />
 
                 </div>
@@ -67,24 +41,46 @@ function Header() {
                 {/* right */}
 
                 <div className="flex items-center justify-end space-x-4">
-                    <HomeIcon className="navBtn" />
                     <MenuIcon className="h-6 md:hidden cursor-pointer" />
-                    <div className="relative navBtn">
-                        <PaperAirplaneIcon className="navBtn rotate-45" />
-                        <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center
+
+
+                    <HomeIcon onClick={() => router.push("/")} className="navBtn" />
+
+                    {session ? (
+                        <>
+
+                            <div className="relative navBtn">
+                                <PaperAirplaneIcon className="navBtn rotate-45" />
+                                <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center
                         text-white animate-pulse">3</div>
 
-                    </div>
-                    <PlusCircleIcon className="navBtn" />
-                    <UserGroupIcon className="navBtn" />
+                            </div>
+                            <PlusCircleIcon className="navBtn" />
+                            <UserGroupIcon className="navBtn" />
 
-                    <HeartIcon className="navBtn" />
+                            <HeartIcon className="navBtn" />
 
-                    <img src="/images/sample1.jpg"
-                        className="rounded-full h-10 cursor-pointer " alt="profilepic" />
+                            {session?.user?.image ? (
+                                <img src={session?.user?.image} onClick={signOut}
+                                    className="rounded-full h-10 cursor-pointer " alt="profilepic" />
+                            ) : (
+                                <div></div>
+                            )
+                            }
 
+                        </>
+
+
+                    ) : (
+
+                        <button onClick={signIn} >Sign In</button>
+
+                    )
+                    }
 
                 </div>
+
+
 
 
             </div>
