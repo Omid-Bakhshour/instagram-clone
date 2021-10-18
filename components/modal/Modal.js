@@ -7,7 +7,6 @@ import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/fi
 import { db, storage } from "../../firebase"
 import { useSession } from "next-auth/react"
 import { ref, getDownloadURL, uploadString } from "@firebase/storage"
-// import {}
 
 function Modal() {
     const [open, setOpen] = useRecoilState(modalState)
