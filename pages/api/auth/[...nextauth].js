@@ -58,14 +58,13 @@ export default NextAuth({
         jwt: true,
     },
     jwt: {
-        // A secret to use for key generation - you should set this explicitly
-        // Defaults to NextAuth.js secret if not explicitly specified.
+
         secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
     }, callbacks: {
 
         async session({ session, token, user }) {
             session.user.username = session.user.name.split(" ").join("").toLocaleLowerCase();
-            session.user.uid = token;
+            session.user.uid = session.user.name + session.user.email;
 
             return session;
         }
